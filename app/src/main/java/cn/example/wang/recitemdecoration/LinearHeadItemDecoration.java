@@ -59,10 +59,15 @@ public class LinearHeadItemDecoration extends RecyclerView.ItemDecoration {
                 String name = citiListBean.getName();
                 nextTage = tage;
                 tage = citiListBean.getTage();
-
-                paint.setColor(Color.WHITE);
-                c.drawRect(paddingLeft, top, right, bottom + decoration, paint);
                 if(tage == nextTage) {
+                    if(position +1 < childCount){
+                        RecBean.CitiListBean bean = citiList.get(position + 1);
+                        int tage1 = bean.getTage();
+                        if(tage1 == tage ){
+                            paint.setColor(Color.WHITE);
+                            c.drawRect(paddingLeft, top, right, bottom + decoration, paint);
+                        }
+                    }
                     continue;
                 }
                     paint.setColor(Color.parseColor("#333333"));
@@ -95,7 +100,7 @@ public class LinearHeadItemDecoration extends RecyclerView.ItemDecoration {
         if(tage != nextTage){
             outRect.top = headlerHeight;
          }else {
-            outRect.top = 0;
+            outRect.top = decoration;
         }
 
     }
